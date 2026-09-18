@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard - AI Finance Assistant</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+
+<body>
+
+
+    <!-- ==================================================
+         NAVIGATION BAR
+         ================================================== -->
+
+    <nav>
+
+        <div class="logo">
+            AI Finance Assistant
+        </div>
+
+
+        <div class="nav-links">
+
+            <a href="/dashboard">
+                Dashboard
+            </a>
+
+            <a href="/transactions">
+                Transactions
+            </a>
+
+            <a href="/budget">
+                Budget
+            </a>
+
+            <a href="/insights">
+                AI Insights
+            </a>
+
+            <a href="/logout">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- ==================================================
+         DASHBOARD MAIN SECTION
+         ================================================== -->
+
+    <div class="hero">
+
+
+        <h1>
+            Financial Dashboard
+        </h1>
+
+
+        <p>
+            Welcome to your AI Finance Assistant.
+        </p>
+
+
+        <br>
+
+
+        <!-- ==================================================
+             FINANCIAL SUMMARY
+             ================================================== -->
+
+        <h2>
+            Financial Summary
+        </h2>
+
+
+        <div class="summary-container">
+
+
+            <!-- TOTAL INCOME -->
+
+            <div class="summary-card">
+
+                <h3>
+                    Total Income
+                </h3>
+
+                <p>
+                    ₹{{ "%.2f"|format(total_income) }}
+                </p>
+
+            </div>
+
+
+            <!-- TOTAL EXPENSES -->
+
+            <div class="summary-card">
+
+                <h3>
+                    Total Expenses
+                </h3>
+
+                <p>
+                    ₹{{ "%.2f"|format(total_expenses) }}
+                </p>
+
+            </div>
+
+
+            <!-- BALANCE -->
+
+            <div class="summary-card">
+
+                <h3>
+                    Balance
+                </h3>
+
+                <p>
+                    ₹{{ "%.2f"|format(balance) }}
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+
+        <br>
+        <br>
+
+
+        <!-- ==================================================
+             QUICK ACTIONS
+             ================================================== -->
+
+        <h2>
+            Quick Actions
+        </h2>
+
+
+        <br>
+
+
+        <div class="buttons">
+
+            <a href="/add-transaction"
+               class="btn">
+
+                Add Transaction
+
+            </a>
+
+
+            <a href="/transactions"
+               class="btn">
+
+                View Transactions
+
+            </a>
+
+
+            <a href="/budget"
+               class="btn">
+
+                Manage Budget
+
+            </a>
+
+
+            <a href="/insights"
+               class="btn">
+
+                AI Insights
+
+            </a>
+
+        </div>
+
+
+
+        <br>
+        <br>
+        <hr>
+        <br>
+
+
+
+        <!-- ==================================================
+             CATEGORY-WISE EXPENSE ANALYSIS
+             ================================================== -->
+
+        <h2>
+            Category-wise Expense Analysis
+        </h2>
+
+
+        <br>
+
+
+        {% if category_expenses %}
+
+
+        <div class="chart-container">
+
+            <canvas id="categoryChart"></canvas>
+
+        </div>
+
+
+        {% else %}
+
+        <p>
+            No expense data available for category analysis.
+        </p>
+
+        {% endif %}
+
+
+
+        <br>
+        <br>
+
+
+
+        <!-- ==================================================
+             MONTHLY EXPENSE ANALYSIS
+             ================================================== -->
+
+        <h2>
+            Monthly Expense Analysis
+        </h2>
+
+
+        <br>
+
+
+        {% if monthly_expenses %}
+
+
+        <div class="chart-container">
+
+            <canvas id="monthlyChart"></canvas>
+
+        </div>
+
+
+        {% else %}
+
+        <p>
+            No monthly expense data available.
+        </p>
+
+        {% endif %}
+
+
+
+        <br>
+        <br>
+        <hr>
+        <br>
+
+
+
+        <!-- ==================================================
+             BUDGET MONITORING
+             ================================================== -->
+
+        <h2>
+            Budget Monitoring
+        </h2>
+
+
+        <br>
+
+
+        {% if budget_monitoring %}
+
+
+        <table class="expense-table">
+
+
+            <!-- TABLE HEADER -->
+
+            <tr>
+
+                <th>
+                    Month
+                </th>
+
+                <th>
+                    Category
+                </th>
+
+                <th>
+                    Budget Limit
+                </th>
+
+                <th>
+                    Amount Spent
+                </th>
+
+                <th>
+                    Remaining
+                </th>
+
+                <th>
+                    Status
+                </th>
+
+            </tr>
+
+
+
+            <!-- BUDGET DATA -->
+
+            {% for budget in budget_monitoring %}
+
+
+            <tr>
+
+
+                <!-- MONTH -->
+
+                <td>
+                    {{ budget.month }}
+                </td>
+
+
+                <!-- CATEGORY -->
+
+                <td>
+                    {{ budget.category }}
+                </td>
+
+
+                <!-- BUDGET LIMIT -->
+
+                <td>
+                    ₹{{ "%.2f"|format(budget.limit_amount) }}
+                </td>
+
+
+                <!-- AMOUNT SPENT -->
+
+                <td>
+                    ₹{{ "%.2f"|format(budget.spent) }}
+                </td>
+
+
+                <!-- REMAINING -->
+
+                <td>
+
+                    {% if budget.limit_amount - budget.spent >= 0 %}
+
+                        ₹{{ "%.2f"|format(budget.limit_amount - budget.spent) }}
+
+                    {% else %}
+
+                        -₹{{ "%.2f"|format(budget.spent - budget.limit_amount) }}
+
+                    {% endif %}
+
+                </td>
+
+
+                <!-- STATUS -->
+
+                <td>
+
+
+                    {% if budget.status == "Within Budget" %}
+
+
+                        <span class="status-within">
+
+                            {{ budget.status }}
+
+                        </span>
+
+
+                    {% elif budget.status == "Limit Reached" %}
+
+
+                        <span class="status-limit">
+
+                            {{ budget.status }}
+
+                        </span>
+
+
+                    {% else %}
+
+
+                        <span class="status-exceeded">
+
+                            {{ budget.status }}
+
+                        </span>
+
+
+                    {% endif %}
+
+
+                </td>
+
+
+            </tr>
+
+
+            {% endfor %}
+
+
+        </table>
+
+
+        {% else %}
+
+
+        <p>
+            No budgets have been created yet.
+        </p>
+
+
+        <br>
+
+
+        <a href="/budget"
+           class="btn">
+
+            Set Your First Budget
+
+        </a>
+
+
+        {% endif %}
+
+
+
+        <br>
+        <br>
+
+
+
+        <!-- ==================================================
+             BOTTOM ACTION BUTTONS
+             ================================================== -->
+
+        <a href="/add-transaction"
+           class="btn">
+
+            Add New Transaction
+
+        </a>
+
+
+        &nbsp;
+
+
+        <a href="/insights"
+           class="btn">
+
+            View AI Insights
+
+        </a>
+
+
+    </div>
+
+
+
+    <!-- ==================================================
+         CATEGORY CHART JAVASCRIPT
+         ================================================== -->
+
+    {% if category_expenses %}
+
+    <script>
+
+        const categoryLabels = [
+            {% for item in category_expenses %}
+                "{{ item.category }}"{% if not loop.last %},{% endif %}
+            {% endfor %}
+        ];
+
+
+        const categoryValues = [
+            {% for item in category_expenses %}
+                {{ item.total }}{% if not loop.last %},{% endif %}
+            {% endfor %}
+        ];
+
+
+        const categoryCanvas =
+            document.getElementById("categoryChart");
+
+
+        new Chart(categoryCanvas, {
+
+            type: "pie",
+
+            data: {
+
+                labels: categoryLabels,
+
+                datasets: [
+
+                    {
+
+                        label: "Expenses",
+
+                        data: categoryValues
+
+                    }
+
+                ]
+
+            },
+
+            options: {
+
+                responsive: true,
+
+                plugins: {
+
+                    legend: {
+
+                        position: "bottom"
+
+                    },
+
+                    title: {
+
+                        display: true,
+
+                        text: "Expense Distribution by Category"
+
+                    }
+
+                }
+
+            }
+
+        });
+
+    </script>
+
+    {% endif %}
+
+
+
+    <!-- ==================================================
+         MONTHLY CHART JAVASCRIPT
+         ================================================== -->
+
+    {% if monthly_expenses %}
+
+    <script>
+
+        const monthlyLabels = [
+            {% for item in monthly_expenses %}
+                "{{ item.month }}"{% if not loop.last %},{% endif %}
+            {% endfor %}
+        ];
+
+
+        const monthlyValues = [
+            {% for item in monthly_expenses %}
+                {{ item.total }}{% if not loop.last %},{% endif %}
+            {% endfor %}
+        ];
+
+
+        const monthlyCanvas =
+            document.getElementById("monthlyChart");
+
+
+        new Chart(monthlyCanvas, {
+
+            type: "bar",
+
+            data: {
+
+                labels: monthlyLabels,
+
+                datasets: [
+
+                    {
+
+                        label: "Monthly Expenses",
+
+                        data: monthlyValues
+
+                    }
+
+                ]
+
+            },
+
+            options: {
+
+                responsive: true,
+
+                scales: {
+
+                    y: {
+
+                        beginAtZero: true,
+
+                        title: {
+
+                            display: true,
+
+                            text: "Amount (₹)"
+
+                        }
+
+                    },
+
+                    x: {
+
+                        title: {
+
+                            display: true,
+
+                            text: "Month"
+
+                        }
+
+                    }
+
+                },
+
+                plugins: {
+
+                    legend: {
+
+                        display: true
+
+                    },
+
+                    title: {
+
+                        display: true,
+
+                        text: "Monthly Expense Trend"
+
+                    }
+
+                }
+
+            }
+
+        });
+
+    </script>
+
+    {% endif %}
+
+
+
+</body>
+
+</html>

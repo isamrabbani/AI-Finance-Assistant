@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Financial Insights - AI Finance Assistant</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+
+    <nav>
+
+        <div class="logo">
+            AI Finance Assistant
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/dashboard">
+                Dashboard
+            </a>
+
+            <a href="/transactions">
+                Transactions
+            </a>
+
+            <a href="/budget">
+                Budget
+            </a>
+
+            <a href="/insights">
+                AI Insights
+            </a>
+
+            <a href="/logout">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- AI INSIGHTS -->
+
+    <div class="hero">
+
+        <h1>
+            AI Financial Insights
+        </h1>
+
+        <p>
+            Your financial activity has been analyzed.
+        </p>
+
+        <br>
+
+
+        <!-- SUMMARY -->
+
+        <div class="summary-container">
+
+            <div class="summary-card">
+
+                <h3>
+                    Total Income
+                </h3>
+
+                <p>
+                    ₹{{ "%.2f"|format(total_income) }}
+                </p>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <h3>
+                    Total Expenses
+                </h3>
+
+                <p>
+                    ₹{{ "%.2f"|format(total_expenses) }}
+                </p>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <h3>
+                    Balance
+                </h3>
+
+                <p>
+                    ₹{{ "%.2f"|format(balance) }}
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <br>
+        <hr>
+        <br>
+
+
+        <h2>
+            🤖 AI Recommendations
+        </h2>
+
+        <br>
+
+
+        {% if insights %}
+
+            {% for insight in insights %}
+
+                <div class="summary-card"
+                     style="width: 80%; max-width: 700px; margin: 15px auto;">
+
+                    <p style="font-size: 18px;">
+
+                        {{ insight.insight_text }}
+
+                    </p>
+
+                </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <p>
+                No financial insights available yet.
+                Add some transactions to generate insights.
+            </p>
+
+        {% endif %}
+
+
+        <br>
+
+
+        <a href="/dashboard"
+           class="btn">
+
+            Back to Dashboard
+
+        </a>
+
+    </div>
+
+</body>
+
+</html>

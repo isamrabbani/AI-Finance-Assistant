@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Transactions - AI Finance Assistant</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+
+    <!-- ==================================================
+         NAVIGATION BAR
+         ================================================== -->
+
+    <nav>
+
+        <div class="logo">
+            AI Finance Assistant
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/dashboard">
+                Dashboard
+            </a>
+
+            <a href="/budget">
+                Budget
+            </a>
+
+            <a href="/logout">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ==================================================
+         TRANSACTION HISTORY
+         ================================================== -->
+
+    <div class="hero">
+
+        <h1>
+            Transaction History
+        </h1>
+
+        <br>
+
+
+        <!-- ADD TRANSACTION BUTTON -->
+
+        <a href="/add-transaction"
+           class="btn">
+
+            Add Transaction
+
+        </a>
+
+        <br>
+        <br>
+
+
+        {% if transactions %}
+
+
+        <!-- ==================================================
+             TRANSACTION TABLE
+             ================================================== -->
+
+        <table class="expense-table">
+
+
+            <!-- TABLE HEADER -->
+
+            <tr>
+
+                <th>
+                    Date
+                </th>
+
+                <th>
+                    Description
+                </th>
+
+                <th>
+                    Amount
+                </th>
+
+                <th>
+                    Type
+                </th>
+
+                <th>
+                    Category
+                </th>
+
+                <th>
+                    AI Prediction
+                </th>
+
+                <th>
+                    AI Confidence
+                </th>
+
+                <th>
+                    Action
+                </th>
+
+            </tr>
+
+
+            <!-- ==================================================
+                 TRANSACTION DATA
+                 ================================================== -->
+
+            {% for transaction in transactions %}
+
+
+            <tr>
+
+
+                <!-- DATE -->
+
+                <td>
+                    {{ transaction.date }}
+                </td>
+
+
+                <!-- DESCRIPTION -->
+
+                <td>
+                    {{ transaction.description }}
+                </td>
+
+
+                <!-- AMOUNT -->
+
+                <td>
+                    ₹{{ "%.2f"|format(transaction.amount) }}
+                </td>
+
+
+                <!-- TYPE -->
+
+                <td>
+                    {{ transaction.type }}
+                </td>
+
+
+                <!-- CATEGORY -->
+
+                <td>
+                    {{ transaction.category }}
+                </td>
+
+
+                <!-- AI PREDICTION -->
+
+                <td>
+
+                    {% if transaction.predicted_category %}
+
+                        {{ transaction.predicted_category }}
+
+                    {% else %}
+
+                        N/A
+
+                    {% endif %}
+
+                </td>
+
+
+                <!-- AI CONFIDENCE -->
+
+                <td>
+
+                    {% if transaction.confidence is not none %}
+
+                        {{ "%.2f"|format(transaction.confidence) }}%
+
+                    {% else %}
+
+                        N/A
+
+                    {% endif %}
+
+                </td>
+
+
+                <!-- ACTION -->
+
+                <td>
+
+                    <a href="/edit-transaction/{{ transaction.transaction_id }}">
+                        Edit
+                    </a>
+
+                    &nbsp; | &nbsp;
+
+                    <a href="/delete-transaction/{{ transaction.transaction_id }}">
+                        Delete
+                    </a>
+
+                </td>
+
+
+            </tr>
+
+
+            {% endfor %}
+
+
+        </table>
+
+
+        {% else %}
+
+
+        <!-- NO TRANSACTIONS -->
+
+        <p>
+            No transactions found.
+        </p>
+
+
+        {% endif %}
+
+
+        <br>
+        <br>
+
+
+        <!-- BACK TO DASHBOARD -->
+
+        <a href="/dashboard"
+           class="btn">
+
+            Back to Dashboard
+
+        </a>
+
+
+    </div>
+
+
+</body>
+
+</html>

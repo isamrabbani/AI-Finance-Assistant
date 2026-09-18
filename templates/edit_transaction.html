@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Transaction - AI Finance Assistant</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+
+    <!-- NAVIGATION BAR -->
+
+    <nav>
+
+        <div class="logo">
+            AI Finance Assistant
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/dashboard">
+                Dashboard
+            </a>
+
+            <a href="/transactions">
+                Transactions
+            </a>
+
+            <a href="/budget">
+                Budget
+            </a>
+
+            <a href="/logout">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- EDIT TRANSACTION FORM -->
+
+    <div class="hero">
+
+        <h1>
+            Edit Transaction
+        </h1>
+
+        <br>
+
+
+        <form method="POST">
+
+
+            <!-- DATE -->
+
+            <label>
+                Date
+            </label>
+
+            <br>
+
+            <input
+                type="date"
+                name="date"
+                value="{{ transaction.date }}"
+                required
+            >
+
+            <br><br>
+
+
+            <!-- DESCRIPTION -->
+
+            <label>
+                Description
+            </label>
+
+            <br>
+
+            <input
+                type="text"
+                name="description"
+                value="{{ transaction.description }}"
+                placeholder="Example: Swiggy dinner"
+                required
+            >
+
+            <br><br>
+
+
+            <!-- AMOUNT -->
+
+            <label>
+                Amount
+            </label>
+
+            <br>
+
+            <input
+                type="number"
+                name="amount"
+                value="{{ transaction.amount }}"
+                step="0.01"
+                min="0.01"
+                required
+            >
+
+            <br><br>
+
+
+            <!-- TYPE -->
+
+            <label>
+                Type
+            </label>
+
+            <br>
+
+            <select name="type" required>
+
+                <option value="Income"
+                    {% if transaction.type == "Income" %}
+                    selected
+                    {% endif %}>
+                    Income
+                </option>
+
+                <option value="Expense"
+                    {% if transaction.type == "Expense" %}
+                    selected
+                    {% endif %}>
+                    Expense
+                </option>
+
+            </select>
+
+            <br><br>
+
+
+            <!-- CATEGORY -->
+
+            <label>
+                Category
+            </label>
+
+            <br>
+
+            <select name="category">
+
+                <option value="Other"
+                    {% if transaction.category == "Other" %}
+                    selected
+                    {% endif %}>
+                    Other
+                </option>
+
+                <option value="Food"
+                    {% if transaction.category == "Food" %}
+                    selected
+                    {% endif %}>
+                    Food
+                </option>
+
+                <option value="Transport"
+                    {% if transaction.category == "Transport" %}
+                    selected
+                    {% endif %}>
+                    Transport
+                </option>
+
+                <option value="Shopping"
+                    {% if transaction.category == "Shopping" %}
+                    selected
+                    {% endif %}>
+                    Shopping
+                </option>
+
+                <option value="Bills"
+                    {% if transaction.category == "Bills" %}
+                    selected
+                    {% endif %}>
+                    Bills
+                </option>
+
+                <option value="Entertainment"
+                    {% if transaction.category == "Entertainment" %}
+                    selected
+                    {% endif %}>
+                    Entertainment
+                </option>
+
+                <option value="Health"
+                    {% if transaction.category == "Health" %}
+                    selected
+                    {% endif %}>
+                    Health
+                </option>
+
+                <option value="Education"
+                    {% if transaction.category == "Education" %}
+                    selected
+                    {% endif %}>
+                    Education
+                </option>
+
+            </select>
+
+            <br><br>
+
+
+            <!-- SAVE BUTTON -->
+
+            <button
+                type="submit"
+                class="btn">
+
+                Update Transaction
+
+            </button>
+
+        </form>
+
+
+        <br><br>
+
+
+        <a href="/transactions"
+           class="btn">
+
+            Back to Transactions
+
+        </a>
+
+    </div>
+
+
+</body>
+
+</html>
