@@ -1,0 +1,472 @@
+/* ==================================================
+   BASIC RESET
+   ================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* ==================================================
+   BODY
+   ================================================== */
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f1f5f9;
+    color: #1e293b;
+}
+
+
+/* ==================================================
+   NAVIGATION BAR
+   ================================================== */
+
+nav {
+    width: 100%;
+    background: #172554;
+    padding: 20px 50px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+/* Logo */
+
+.logo {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+
+/* Navigation Links */
+
+.nav-links {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+
+    border: 1px solid white;
+
+    padding: 10px 18px;
+
+    border-radius: 6px;
+
+    transition: 0.3s;
+}
+
+
+.nav-links a:hover {
+    background: white;
+    color: #172554;
+}
+
+
+/* ==================================================
+   MAIN HERO / CONTENT BOX
+   ================================================== */
+
+.hero {
+    width: 90%;
+    max-width: 1000px;
+
+    margin: 50px auto;
+
+    padding: 50px 40px;
+
+    background: white;
+
+    border-radius: 15px;
+
+    text-align: center;
+
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+}
+
+
+/* ==================================================
+   HEADINGS
+   ================================================== */
+
+.hero h1 {
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+
+.hero h2 {
+    font-size: 25px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+
+.hero h3 {
+    font-size: 18px;
+}
+
+
+.hero p {
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+
+/* ==================================================
+   BUTTONS
+   ================================================== */
+
+.btn {
+    display: inline-block;
+
+    background: #2563eb;
+
+    color: white;
+
+    text-decoration: none;
+
+    padding: 13px 25px;
+
+    border-radius: 7px;
+
+    font-weight: bold;
+
+    border: none;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+
+.btn:hover {
+    background: #1d4ed8;
+}
+
+
+/* ==================================================
+   BUTTON GROUP
+   ================================================== */
+
+.buttons {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 20px;
+
+    flex-wrap: wrap;
+}
+
+
+/* ==================================================
+   FINANCIAL SUMMARY
+   ================================================== */
+
+.summary-container {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 20px;
+
+    flex-wrap: wrap;
+
+    margin-top: 20px;
+}
+
+
+.summary-card {
+    background: #f8fafc;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 10px;
+
+    padding: 25px;
+
+    width: 200px;
+
+    text-align: center;
+
+    transition: 0.3s;
+}
+
+
+.summary-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.10);
+}
+
+
+.summary-card h3 {
+    margin-bottom: 15px;
+
+    font-size: 18px;
+}
+
+
+.summary-card p {
+    font-size: 25px;
+
+    font-weight: bold;
+}
+
+
+/* ==================================================
+   TABLE
+   ================================================== */
+
+.expense-table {
+    width: 100%;
+
+    margin: 20px auto;
+
+    border-collapse: collapse;
+
+    background: white;
+}
+
+
+.expense-table th,
+.expense-table td {
+    border: 1px solid #cbd5e1;
+
+    padding: 12px;
+
+    text-align: center;
+}
+
+
+.expense-table th {
+    background: #e2e8f0;
+
+    font-weight: bold;
+}
+
+
+.expense-table tr:nth-child(even) {
+    background: #f8fafc;
+}
+
+
+.expense-table tr:hover {
+    background: #f1f5f9;
+}
+
+
+/* ==================================================
+   CHART CONTAINER
+   ================================================== */
+
+.chart-container {
+    width: 450px;
+
+    max-width: 100%;
+
+    margin: 20px auto;
+
+    padding: 20px;
+
+    background: #ffffff;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 10px;
+}
+
+
+/* ==================================================
+   BUDGET STATUS
+   ================================================== */
+
+/* Within Budget */
+
+.status-within {
+    color: #15803d;
+
+    font-weight: bold;
+
+    background: #dcfce7;
+
+    padding: 6px 10px;
+
+    border-radius: 6px;
+}
+
+
+/* Limit Reached */
+
+.status-limit {
+    color: #c2410c;
+
+    font-weight: bold;
+
+    background: #ffedd5;
+
+    padding: 6px 10px;
+
+    border-radius: 6px;
+}
+
+
+/* Exceeded */
+
+.status-exceeded {
+    color: #b91c1c;
+
+    font-weight: bold;
+
+    background: #fee2e2;
+
+    padding: 6px 10px;
+
+    border-radius: 6px;
+}
+
+
+/* ==================================================
+   FORMS
+   ================================================== */
+
+form {
+    width: 100%;
+
+    max-width: 500px;
+
+    margin: 0 auto;
+}
+
+
+form label {
+    display: inline-block;
+
+    margin-bottom: 5px;
+
+    font-weight: bold;
+}
+
+
+form input,
+form select {
+    width: 100%;
+
+    padding: 12px;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 6px;
+
+    font-size: 16px;
+
+    outline: none;
+}
+
+
+form input:focus,
+form select:focus {
+    border-color: #2563eb;
+
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
+
+form button {
+    margin-top: 10px;
+}
+
+
+/* ==================================================
+   HORIZONTAL LINE
+   ================================================== */
+
+hr {
+    border: none;
+
+    border-top: 1px solid #cbd5e1;
+
+    margin: 20px 0;
+}
+
+
+/* ==================================================
+   MOBILE RESPONSIVE DESIGN
+   ================================================== */
+
+@media (max-width: 768px) {
+
+    nav {
+        padding: 15px 20px;
+
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+
+    .logo {
+        font-size: 20px;
+    }
+
+
+    .hero {
+        width: 95%;
+
+        padding: 35px 20px;
+
+        margin: 30px auto;
+    }
+
+
+    .hero h1 {
+        font-size: 30px;
+    }
+
+
+    .hero h2 {
+        font-size: 22px;
+    }
+
+
+    .summary-card {
+        width: 100%;
+
+        max-width: 300px;
+    }
+
+
+    .chart-container {
+        width: 100%;
+
+        padding: 10px;
+    }
+
+
+    .expense-table {
+        font-size: 14px;
+    }
+
+
+    .expense-table th,
+    .expense-table td {
+        padding: 8px;
+    }
+
+
+    .nav-links {
+        justify-content: center;
+    }
+
+}
