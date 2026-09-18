@@ -1,0 +1,39 @@
+description,category
+Swiggy food,Food
+Zomato dinner,Food
+Restaurant lunch,Food
+Pizza dinner,Food
+Burger,Food
+Groceries,Food
+Milk and bread,Food
+Coffee,Food
+Uber ride,Transport
+Ola cab,Transport
+Bus ticket,Transport
+Train ticket,Transport
+Petrol,Transport
+Fuel,Transport
+Metro ticket,Transport
+Auto ride,Transport
+Nike shoes,Shopping
+Amazon clothes,Shopping
+Bought shirt,Shopping
+Shopping mall,Shopping
+New jeans,Shopping
+Mobile phone,Shopping
+Electricity bill,Bills
+Water bill,Bills
+Internet bill,Bills
+Phone bill,Bills
+Netflix subscription,Entertainment
+Movie ticket,Entertainment
+Gaming,Entertainment
+Concert ticket,Entertainment
+Doctor appointment,Health
+Medicine,Health
+Pharmacy,Health
+Hospital bill,Health
+College fees,Education
+Books,Education
+Online course,Education
+Exam fees,Education
